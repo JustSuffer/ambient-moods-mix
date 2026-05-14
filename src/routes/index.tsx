@@ -8,11 +8,11 @@ import bgRain from "@/assets/bg-rain.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Ambience — Karıştır & Dinle" },
+      { title: "YourAmbience — Mix & Listen" },
       {
         name: "description",
         content:
-          "Yağmur, alev çıtırtısı, lofi ve karanlık fantezi sesleriyle kendi atmosferini yarat. Aynı anda iki sesi birleştir.",
+          "Mix rain, fireplace crackle, lofi beats, and dark fantasy boss themes. Layer up to two ambient sounds and craft your own atmosphere.",
       },
     ],
   }),
@@ -25,6 +25,7 @@ interface SoundDef {
   id: SoundId;
   title: string;
   subtitle: string;
+  tag: string;
   bg: string;
   src: string;
   accent: string;
@@ -33,34 +34,38 @@ interface SoundDef {
 const SOUNDS: SoundDef[] = [
   {
     id: "darksouls",
-    title: "Lordran",
-    subtitle: "Karanlık fantezi · solgun küller",
+    title: "Middle Earth",
+    subtitle: "Boss fight · grand orchestral dread",
+    tag: "dark fantasy",
     bg: bgDarkSouls,
-    src: "https://archive.org/download/SoporificSorcery-2013-MischievousMisanthropy/03_Corridors_of_Madness.mp3",
+    src: "https://archive.org/download/great-grey-wolf-sif/Gwyn%2C%20Lord%20of%20Cinder.mp3",
     accent: "from-amber-300/60 to-amber-100/10",
   },
   {
     id: "lofi",
     title: "Sofi's Room",
-    subtitle: "Lofi beats · gece çalışması",
+    subtitle: "Lofi beats · late night study",
+    tag: "lofi",
     bg: bgLofi,
     src: "https://archive.org/download/jamendo-429174/01-1817528-Alexey%20Anisimov-Lo-Fi%20Chill%20Hip-Hop%20_Instrumental_.mp3",
     accent: "from-rose-300/60 to-rose-100/10",
   },
   {
     id: "fire",
-    title: "Şömine",
-    subtitle: "Alev çıtırtısı · sıcak kömürler",
+    title: "Fireplace",
+    subtitle: "Crackling flames · warm embers",
+    tag: "fire",
     bg: bgFire,
     src: "https://archive.org/download/crackling-fireplace_daniel-simion/crackling-fireplace_daniel-simion.mp3",
     accent: "from-orange-400/70 to-yellow-200/10",
   },
   {
     id: "rain",
-    title: "Yağmur",
-    subtitle: "Cama vuran damlalar",
+    title: "Window Rain",
+    subtitle: "Soft drops tapping the glass",
+    tag: "rain",
     bg: bgRain,
-    src: "https://archive.org/download/crackling-fireplace_daniel-simion/Rain_Background-Mike_Koenig-1681389445.mp3",
+    src: "https://archive.org/download/aporee_2104_35714/berlinBuerkner9HhofEisregen160223.mp3",
     accent: "from-sky-300/60 to-slate-100/10",
   },
 ];
@@ -82,28 +87,61 @@ function Index() {
     rain: null,
   });
 
+  // Preload all tracks aggressively so play() responds instantly.
+  useEffect(() => {
+    SOUNDS.forEach((s) => {
+      const el = audioRefs.current[s.id];
+      if (!el) return;
+      el.preload = "auto";
+      try {
+        el.load();
+      } catch {}
+    });
+  }, []);
+
   useEffect(() => {
     SOUNDS.forEach((s) => {
       const el = audioRefs.current[s.id];
       if (!el) return;
       el.volume = volumes[s.id];
       if (active.includes(s.id)) {
-        el.play().catch(() => {});
+        if (el.paused) el.play().catch(() => {});
       } else {
-        el.pause();
+        if (!el.paused) el.pause();
       }
     });
   }, [active, volumes]);
 
   const toggle = (id: SoundId) => {
+    // Kick the audio element synchronously inside the user-gesture handler
+    // so playback starts immediately (no perceived 2s delay).
+    const el = audioRefs.current[id];
     setActive((prev) => {
-      if (prev.includes(id)) return prev.filter((x) => x !== id);
-      if (prev.length >= MAX_ACTIVE) return [prev[1], id];
+      if (prev.includes(id)) {
+        if (el && !el.paused) el.pause();
+        return prev.filter((x) => x !== id);
+      }
+      if (el) {
+        el.volume = volumes[id];
+        el.play().catch(() => {});
+      }
+      if (prev.length >= MAX_ACTIVE) {
+        const dropped = prev[0];
+        const droppedEl = audioRefs.current[dropped];
+        if (droppedEl && !droppedEl.paused) droppedEl.pause();
+        return [prev[1], id];
+      }
       return [...prev, id];
     });
   };
 
-  const stopAll = () => setActive([]);
+  const stopAll = () => {
+    SOUNDS.forEach((s) => {
+      const el = audioRefs.current[s.id];
+      if (el && !el.paused) el.pause();
+    });
+    setActive([]);
+  };
 
   const bgLayers = useMemo(() => {
     if (active.length === 0) {
@@ -113,7 +151,6 @@ function Index() {
       const idx = active.indexOf(s.id);
       if (idx === -1) return { src: s.bg, opacity: 0, clip: "" };
       if (active.length === 1) return { src: s.bg, opacity: 1, clip: "" };
-      // two active: split screen
       const clip =
         idx === 0
           ? "polygon(0 0, 55% 0, 45% 100%, 0 100%)"
@@ -140,11 +177,11 @@ function Index() {
             />
           );
         })}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/30 to-background/85" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.55)_100%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/90" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.65)_100%)]" />
       </div>
 
-      {/* Hidden audio */}
+      {/* Hidden audio — preload auto so play() is instant */}
       {SOUNDS.map((s) => (
         <audio
           key={s.id}
@@ -153,7 +190,8 @@ function Index() {
           }}
           src={s.src}
           loop
-          preload="none"
+          preload="auto"
+          crossOrigin="anonymous"
         />
       ))}
 
@@ -161,14 +199,14 @@ function Index() {
         <header className="flex items-start justify-between gap-6">
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.35em] text-foreground/60">
-              ambience · v1
+              YourAmbience · v1
             </p>
             <h1 className="mt-3 font-serif text-4xl leading-[0.95] tracking-tight md:text-6xl">
-              Kendi atmosferini <em className="italic text-amber-200/90">karıştır</em>.
+              Mix your own <em className="italic text-amber-200/90">atmosphere</em>.
             </h1>
             <p className="mt-4 max-w-xl text-sm text-foreground/70 md:text-base">
-              Dört dünya. Aynı anda en fazla iki ses. Bir kart seç, sonra ikincisini
-              ekle — arka plan ve atmosfer onlarla birlikte değişsin.
+              Four worlds. Up to two sounds at once. Pick a card, then layer a
+              second one — the background and mood shift with them.
             </p>
           </div>
           <button
@@ -176,7 +214,7 @@ function Index() {
             disabled={active.length === 0}
             className="hidden shrink-0 rounded-full border border-foreground/20 bg-background/40 px-4 py-2 text-xs uppercase tracking-widest backdrop-blur transition hover:bg-background/60 disabled:opacity-30 md:block"
           >
-            Sustur
+            Mute all
           </button>
         </header>
 
@@ -209,14 +247,7 @@ function Index() {
                   <div className="flex items-start justify-between">
                     <div>
                       <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/70">
-                        {String(SOUNDS.indexOf(s) + 1).padStart(2, "0")} ·{" "}
-                        {s.id === "darksouls"
-                          ? "dark fantasy"
-                          : s.id === "lofi"
-                            ? "lofi"
-                            : s.id === "fire"
-                              ? "fire"
-                              : "rain"}
+                        {String(SOUNDS.indexOf(s) + 1).padStart(2, "0")} · {s.tag}
                       </p>
                       <h2 className="mt-2 font-serif text-2xl text-white md:text-3xl">
                         {s.title}
@@ -229,7 +260,7 @@ function Index() {
                           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-200 opacity-75" />
                           <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-200" />
                         </span>
-                        canlı · {order + 1}
+                        live · {order + 1}
                       </span>
                     )}
                   </div>
@@ -264,7 +295,7 @@ function Index() {
                           : "bg-white/10 text-white backdrop-blur hover:bg-white/20",
                       ].join(" ")}
                     >
-                      {isActive ? "Durdur" : "Çal"}
+                      {isActive ? "Stop" : "Play"}
                     </button>
                   </div>
                 </div>
@@ -275,9 +306,9 @@ function Index() {
 
         <footer className="mt-10 flex flex-wrap items-center justify-between gap-3 font-mono text-[11px] uppercase tracking-[0.3em] text-foreground/50">
           <span>
-            {active.length}/{MAX_ACTIVE} ses çalıyor
+            {active.length}/{MAX_ACTIVE} sounds playing
           </span>
-          <span>karıştırmak için ikinci kartı seç</span>
+          <span>pick a second card to layer</span>
         </footer>
       </main>
     </div>
