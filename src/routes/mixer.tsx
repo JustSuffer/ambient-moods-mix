@@ -5,6 +5,22 @@ import bgDarkSouls from "@/assets/bg-darksouls.png";
 import bgLofi from "@/assets/bg-lofi.png";
 import bgFire from "@/assets/bg-fire.png";
 import bgRain from "@/assets/bg-rain.jpg";
+import bgCoffee from "@/assets/bg-coffeeshop.jpg";
+import bgLibrary from "@/assets/bg-library.jpg";
+import bgTrain from "@/assets/bg-train.jpg";
+import bgBrook from "@/assets/bg-brook.jpg";
+import bgWoods from "@/assets/bg-woods.jpg";
+import bgThunder from "@/assets/bg-thunder.jpg";
+import bgSurf from "@/assets/bg-surf.jpg";
+import bgClassical from "@/assets/bg-classical.jpg";
+import bgStrings from "@/assets/bg-strings.jpg";
+import bgChimes from "@/assets/bg-chimes.jpg";
+import bgDojo from "@/assets/bg-dojo.jpg";
+import bgElden from "@/assets/bg-elden.jpg";
+import bgTavern from "@/assets/bg-tavern.jpg";
+import bgKeyboard from "@/assets/bg-keyboard.jpg";
+import bgServer from "@/assets/bg-server.jpg";
+import bgWhiteNoise from "@/assets/bg-whitenoise.jpg";
 
 export const Route = createFileRoute("/mixer")({
   head: () => ({
@@ -16,67 +32,138 @@ export const Route = createFileRoute("/mixer")({
   component: Mixer,
 });
 
-type SoundId = "darksouls" | "lofi" | "fire" | "rain";
-
 interface SoundDef {
-  id: SoundId;
+  id: string;
   title: string;
   subtitle: string;
   tag: string;
   bg: string;
   src: string;
   accent: string;
+  section: string;
 }
 
 const SOUNDS: SoundDef[] = [
+  // ───────── Nature ─────────
   {
-    id: "darksouls",
-    title: "Middle Earth",
-    subtitle: "Boss fight · grand orchestral dread",
-    tag: "dark fantasy",
-    bg: bgDarkSouls,
-    src: "https://archive.org/download/great-grey-wolf-sif/Gwyn%2C%20Lord%20of%20Cinder.mp3",
-    accent: "from-amber-300/60 to-amber-100/10",
-  },
-  {
-    id: "lofi",
-    title: "Sofi's Room",
-    subtitle: "Lofi beats · late night study",
-    tag: "lofi",
-    bg: bgLofi,
-    src: "https://archive.org/download/jamendo-429174/01-1817528-Alexey%20Anisimov-Lo-Fi%20Chill%20Hip-Hop%20_Instrumental_.mp3",
-    accent: "from-rose-300/60 to-rose-100/10",
-  },
-  {
-    id: "fire",
-    title: "Fireplace",
-    subtitle: "Crackling flames · warm embers",
-    tag: "fire",
-    bg: bgFire,
-    src: "https://archive.org/download/crackling-fireplace_daniel-simion/crackling-fireplace_daniel-simion.mp3",
-    accent: "from-orange-400/70 to-yellow-200/10",
-  },
-  {
-    id: "rain",
-    title: "Window Rain",
-    subtitle: "Soft drops tapping the glass",
-    tag: "rain",
-    bg: bgRain,
+    id: "rain", title: "Window Rain", subtitle: "Soft drops tapping the glass",
+    tag: "rain", section: "Nature", bg: bgRain, accent: "from-sky-300/60 to-slate-100/10",
     src: "https://archive.org/download/aporee_2104_35714/berlinBuerkner9HhofEisregen160223.mp3",
-    accent: "from-sky-300/60 to-slate-100/10",
+  },
+  {
+    id: "fire", title: "Fireplace", subtitle: "Crackling flames · warm embers",
+    tag: "fire", section: "Nature", bg: bgFire, accent: "from-orange-400/70 to-yellow-200/10",
+    src: "https://archive.org/download/crackling-fireplace_daniel-simion/crackling-fireplace_daniel-simion.mp3",
+  },
+  {
+    id: "brook", title: "Babbling Brook", subtitle: "Clear stream over mossy stones",
+    tag: "water", section: "Nature", bg: bgBrook, accent: "from-emerald-300/60 to-cyan-100/10",
+    src: "https://archive.org/download/water-stream_daniel-simion/water-stream_daniel-simion.mp3",
+  },
+  {
+    id: "woods", title: "Morning Woods", subtitle: "Birdsong and rustling leaves",
+    tag: "forest", section: "Nature", bg: bgWoods, accent: "from-lime-300/60 to-amber-100/10",
+    src: "https://archive.org/download/BirdsChirping_201805/Birds%20Chirping.mp3",
+  },
+  {
+    id: "thunder", title: "Distant Thunderstorm", subtitle: "Rolling thunder beyond the plains",
+    tag: "storm", section: "Nature", bg: bgThunder, accent: "from-indigo-400/60 to-slate-100/10",
+    src: "https://archive.org/download/thunder-sounds/thunder-sound-effect.mp3",
+  },
+  {
+    id: "surf", title: "Midnight Surf", subtitle: "Slow deep ocean waves",
+    tag: "ocean", section: "Nature", bg: bgSurf, accent: "from-blue-400/60 to-indigo-200/10",
+    src: "https://archive.org/download/ocean-waves_202003/ocean-waves.mp3",
+  },
+
+  // ───────── Urban & Life ─────────
+  {
+    id: "coffee", title: "Bustling Coffee Shop", subtitle: "Espresso hisses and quiet chatter",
+    tag: "café", section: "Urban & Life", bg: bgCoffee, accent: "from-amber-400/60 to-orange-100/10",
+    src: "https://archive.org/download/coffee-shop-ambience/coffee-shop-ambience.mp3",
+  },
+  {
+    id: "library", title: "Old Library", subtitle: "Turning pages, silent halls",
+    tag: "silence", section: "Urban & Life", bg: bgLibrary, accent: "from-stone-300/60 to-amber-100/10",
+    src: "https://archive.org/download/library-ambience/library-ambience.mp3",
+  },
+  {
+    id: "train", title: "Night Train Journey", subtitle: "Rhythmic wheels on the rails",
+    tag: "travel", section: "Urban & Life", bg: bgTrain, accent: "from-yellow-300/50 to-zinc-200/10",
+    src: "https://archive.org/download/train-interior_daniel-simion/train-interior_daniel-simion.mp3",
+  },
+  {
+    id: "keyboard", title: "Mechanical Keyboard", subtitle: "Tactile clack of focused typing",
+    tag: "productivity", section: "Urban & Life", bg: bgKeyboard, accent: "from-rose-400/60 to-violet-200/10",
+    src: "https://archive.org/download/mechanical-keyboard-typing/mechanical-keyboard.mp3",
+  },
+  {
+    id: "server", title: "Server Room Hum", subtitle: "Low hypnotic machine drone",
+    tag: "drone", section: "Urban & Life", bg: bgServer, accent: "from-cyan-400/60 to-blue-200/10",
+    src: "https://archive.org/download/server-room-hum/server-room-hum.mp3",
+  },
+
+  // ───────── Music ─────────
+  {
+    id: "lofi", title: "Sofi's Room", subtitle: "Lofi beats · late night study",
+    tag: "lofi", section: "Music", bg: bgLofi, accent: "from-rose-300/60 to-rose-100/10",
+    src: "https://archive.org/download/jamendo-429174/01-1817528-Alexey%20Anisimov-Lo-Fi%20Chill%20Hip-Hop%20_Instrumental_.mp3",
+  },
+  {
+    id: "classical", title: "Classical Masterpieces", subtitle: "Mind-opening, mathematical pieces",
+    tag: "classical", section: "Music", bg: bgClassical, accent: "from-amber-300/60 to-yellow-100/10",
+    src: "https://archive.org/download/MozartPianoConcertoNo.21AndanteElviraMadigan/Mozart-PianoConcertoNo.21-Andante.mp3",
+  },
+  {
+    id: "strings", title: "Melancholic Strings", subtitle: "Solo piano and violin reflections",
+    tag: "strings", section: "Music", bg: bgStrings, accent: "from-violet-300/60 to-rose-100/10",
+    src: "https://archive.org/download/MoonlightSonata_755/Beethoven-MoonlightSonata.mp3",
+  },
+  {
+    id: "chimes", title: "Wind Chimes", subtitle: "Random meditative wooden tones",
+    tag: "meditation", section: "Music", bg: bgChimes, accent: "from-pink-300/60 to-amber-100/10",
+    src: "https://archive.org/download/wind-chimes_daniel-simion/wind-chimes_daniel-simion.mp3",
+  },
+
+  // ───────── Fantasy & Focus ─────────
+  {
+    id: "darksouls", title: "Middle Earth", subtitle: "Boss fight · grand orchestral dread",
+    tag: "dark fantasy", section: "Fantasy & Focus", bg: bgDarkSouls, accent: "from-amber-300/60 to-amber-100/10",
+    src: "https://archive.org/download/great-grey-wolf-sif/Gwyn%2C%20Lord%20of%20Cinder.mp3",
+  },
+  {
+    id: "elden", title: "Elden's Echo", subtitle: "Ancient ruined world · golden silence",
+    tag: "epic", section: "Fantasy & Focus", bg: bgElden, accent: "from-yellow-400/60 to-amber-100/10",
+    src: "https://archive.org/download/wind-howling/wind-howling.mp3",
+  },
+  {
+    id: "tavern", title: "Tavern of Acoria", subtitle: "Dim inn · fire, mugs, distant lute",
+    tag: "tavern", section: "Fantasy & Focus", bg: bgTavern, accent: "from-orange-400/60 to-yellow-100/10",
+    src: "https://archive.org/download/medieval-tavern-ambience/medieval-tavern.mp3",
+  },
+  {
+    id: "dojo", title: "Zen Dojo", subtitle: "Bamboo whisper · disciplined calm",
+    tag: "zen", section: "Fantasy & Focus", bg: bgDojo, accent: "from-emerald-300/60 to-stone-200/10",
+    src: "https://archive.org/download/bamboo-wind-chimes/bamboo-wind.mp3",
+  },
+
+  // ───────── Pure Frequency ─────────
+  {
+    id: "whitenoise", title: "Deep White Noise", subtitle: "Pure acoustic frequency mask",
+    tag: "white noise", section: "Pure Frequency", bg: bgWhiteNoise, accent: "from-zinc-300/60 to-zinc-100/10",
+    src: "https://archive.org/download/WhiteNoise_201808/WhiteNoise.mp3",
   },
 ];
 
+const SECTIONS = ["Nature", "Urban & Life", "Music", "Fantasy & Focus", "Pure Frequency"] as const;
 const MAX_ACTIVE = 2;
 
 function Mixer() {
-  const [active, setActive] = useState<SoundId[]>([]);
-  const [volumes, setVolumes] = useState<Record<SoundId, number>>({
-    darksouls: 0.7, lofi: 0.7, fire: 0.7, rain: 0.7,
-  });
-  const audioRefs = useRef<Record<SoundId, HTMLAudioElement | null>>({
-    darksouls: null, lofi: null, fire: null, rain: null,
-  });
+  const [active, setActive] = useState<string[]>([]);
+  const [volumes, setVolumes] = useState<Record<string, number>>(
+    () => Object.fromEntries(SOUNDS.map((s) => [s.id, 0.7]))
+  );
+  const audioRefs = useRef<Record<string, HTMLAudioElement | null>>({});
 
   useEffect(() => {
     SOUNDS.forEach((s) => {
@@ -91,7 +178,7 @@ function Mixer() {
     SOUNDS.forEach((s) => {
       const el = audioRefs.current[s.id];
       if (!el) return;
-      el.volume = volumes[s.id];
+      el.volume = volumes[s.id] ?? 0.7;
       if (active.includes(s.id)) {
         if (el.paused) el.play().catch(() => {});
       } else if (!el.paused) {
@@ -100,7 +187,7 @@ function Mixer() {
     });
   }, [active, volumes]);
 
-  const toggle = (id: SoundId) => {
+  const toggle = (id: string) => {
     const el = audioRefs.current[id];
     setActive((prev) => {
       if (prev.includes(id)) {
@@ -108,7 +195,7 @@ function Mixer() {
         return prev.filter((x) => x !== id);
       }
       if (el) {
-        el.volume = volumes[id];
+        el.volume = volumes[id] ?? 0.7;
         el.play().catch(() => {});
       }
       if (prev.length >= MAX_ACTIVE) {
@@ -129,40 +216,38 @@ function Mixer() {
     setActive([]);
   };
 
-  const bgLayers = useMemo(() => {
-    if (active.length === 0) {
-      return SOUNDS.map((s) => ({ src: s.bg, opacity: 0.18, clip: "" }));
-    }
-    return SOUNDS.map((s) => {
-      const idx = active.indexOf(s.id);
-      if (idx === -1) return { src: s.bg, opacity: 0, clip: "" };
-      if (active.length === 1) return { src: s.bg, opacity: 1, clip: "" };
-      const clip = idx === 0
-        ? "polygon(0 0, 55% 0, 45% 100%, 0 100%)"
-        : "polygon(55% 0, 100% 0, 100% 100%, 45% 100%)";
-      return { src: s.bg, opacity: 1, clip };
-    });
-  }, [active]);
+  const activeSounds = useMemo(
+    () => active.map((id) => SOUNDS.find((s) => s.id === id)!).filter(Boolean),
+    [active]
+  );
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-background text-foreground">
+      {/* Background layers — only render active ones */}
       <div className="pointer-events-none fixed inset-0 -z-10">
-        {SOUNDS.map((s, i) => {
-          const layer = bgLayers[i];
+        {activeSounds.length === 0 && (
+          <div className="absolute inset-0 bg-gradient-to-br from-zinc-950 via-zinc-900 to-black" />
+        )}
+        {activeSounds.map((s, i) => {
+          const clip =
+            activeSounds.length === 1
+              ? ""
+              : i === 0
+              ? "polygon(0 0, 55% 0, 45% 100%, 0 100%)"
+              : "polygon(55% 0, 100% 0, 100% 100%, 45% 100%)";
           return (
             <div
               key={s.id}
-              className="absolute inset-0 bg-cover bg-center transition-all duration-[1400ms] ease-out"
+              className="absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]"
               style={{
-                backgroundImage: `url(${layer.src})`,
-                opacity: layer.opacity,
-                clipPath: layer.clip || undefined,
+                backgroundImage: `url(${s.bg})`,
+                clipPath: clip || undefined,
               }}
             />
           );
         })}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/90" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.65)_100%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/95" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.7)_100%)]" />
       </div>
 
       {SOUNDS.map((s) => (
@@ -178,17 +263,17 @@ function Mixer() {
 
       <SiteHeader />
 
-      <main className="mx-auto flex max-w-6xl flex-col px-6 py-10 md:px-10 md:py-14">
+      <main className="mx-auto flex max-w-7xl flex-col px-6 py-10 md:px-10 md:py-14">
         <header className="flex items-start justify-between gap-6">
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.35em] text-foreground/60">
               The mixer
             </p>
             <h1 className="mt-3 font-serif text-4xl leading-[0.95] tracking-tight md:text-5xl">
-              Pick a card. <em className="italic text-amber-200/90">Layer another.</em>
+              Twenty worlds. <em className="italic text-amber-200/90">Two at a time.</em>
             </h1>
             <p className="mt-3 max-w-xl text-sm text-foreground/70 md:text-base">
-              Up to two sounds at once. Backgrounds split as you stack moods.
+              Pick from five sections. Layer any two sounds. Tune their volumes independently.
             </p>
           </div>
           <button
@@ -200,76 +285,90 @@ function Mixer() {
           </button>
         </header>
 
-        <section className="mt-10 grid flex-1 grid-cols-1 gap-5 sm:grid-cols-2">
-          {SOUNDS.map((s) => {
-            const isActive = active.includes(s.id);
-            const order = active.indexOf(s.id);
-            return (
-              <article
-                key={s.id}
-                className={[
-                  "group relative overflow-hidden rounded-2xl border transition-all duration-500",
-                  isActive
-                    ? "border-amber-200/40 shadow-[0_0_60px_-20px_rgba(255,200,120,0.55)]"
-                    : "border-foreground/10 hover:border-foreground/30",
-                ].join(" ")}
-              >
-                <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-[1200ms] group-hover:scale-105"
-                  style={{ backgroundImage: `url(${s.bg})` }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/20" />
-                <div className={`absolute inset-0 bg-gradient-to-t ${s.accent} opacity-0 transition-opacity duration-700 ${isActive ? "opacity-100" : ""}`} />
-
-                <div className="relative flex min-h-[220px] flex-col justify-between p-5 md:min-h-[260px] md:p-6">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/70">
-                        {String(SOUNDS.indexOf(s) + 1).padStart(2, "0")} · {s.tag}
-                      </p>
-                      <h2 className="mt-2 font-serif text-2xl text-white md:text-3xl">{s.title}</h2>
-                      <p className="mt-1 text-xs text-white/70 md:text-sm">{s.subtitle}</p>
-                    </div>
-                    {isActive && (
-                      <span className="flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-white backdrop-blur">
-                        <span className="relative flex h-1.5 w-1.5">
-                          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-200 opacity-75" />
-                          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-200" />
-                        </span>
-                        live · {order + 1}
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="space-y-3">
-                    <div className={`flex items-center gap-3 transition-opacity ${isActive ? "opacity-100" : "pointer-events-none opacity-0"}`}>
-                      <span className="font-mono text-[10px] uppercase tracking-widest text-white/60">vol</span>
-                      <input
-                        type="range" min={0} max={1} step={0.01}
-                        value={volumes[s.id]}
-                        onChange={(e) => setVolumes((v) => ({ ...v, [s.id]: parseFloat(e.target.value) }))}
-                        className="h-1 flex-1 cursor-pointer appearance-none rounded-full bg-white/20 accent-amber-200"
-                      />
-                    </div>
-                    <button
-                      onClick={() => toggle(s.id)}
+        {SECTIONS.map((section) => {
+          const items = SOUNDS.filter((s) => s.section === section);
+          return (
+            <section key={section} className="mt-14">
+              <div className="mb-5 flex items-baseline justify-between border-b border-foreground/10 pb-3">
+                <h2 className="font-serif text-2xl text-foreground/90 md:text-3xl">{section}</h2>
+                <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/40">
+                  {items.length} sounds
+                </span>
+              </div>
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {items.map((s) => {
+                  const isActive = active.includes(s.id);
+                  const order = active.indexOf(s.id);
+                  const globalIndex = SOUNDS.indexOf(s) + 1;
+                  return (
+                    <article
+                      key={s.id}
                       className={[
-                        "w-full rounded-xl px-4 py-3 text-sm font-medium uppercase tracking-[0.2em] transition",
-                        isActive ? "bg-white text-black hover:bg-white/90" : "bg-white/10 text-white backdrop-blur hover:bg-white/20",
+                        "group relative overflow-hidden rounded-2xl border transition-all duration-500",
+                        isActive
+                          ? "border-amber-200/40 shadow-[0_0_60px_-20px_rgba(255,200,120,0.55)]"
+                          : "border-foreground/10 hover:border-foreground/30",
                       ].join(" ")}
                     >
-                      {isActive ? "Stop" : "Play"}
-                    </button>
-                  </div>
-                </div>
-              </article>
-            );
-          })}
-        </section>
+                      <div
+                        className="absolute inset-0 bg-cover bg-center transition-transform duration-[1200ms] group-hover:scale-105"
+                        style={{ backgroundImage: `url(${s.bg})` }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20" />
+                      <div className={`absolute inset-0 bg-gradient-to-t ${s.accent} opacity-0 transition-opacity duration-700 ${isActive ? "opacity-100" : ""}`} />
 
-        <footer className="mt-10 flex flex-wrap items-center justify-between gap-3 font-mono text-[11px] uppercase tracking-[0.3em] text-foreground/50">
+                      <div className="relative flex min-h-[220px] flex-col justify-between p-5">
+                        <div className="flex items-start justify-between gap-3">
+                          <div>
+                            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/70">
+                              {String(globalIndex).padStart(2, "0")} · {s.tag}
+                            </p>
+                            <h3 className="mt-2 font-serif text-xl text-white md:text-2xl">{s.title}</h3>
+                            <p className="mt-1 text-xs text-white/70">{s.subtitle}</p>
+                          </div>
+                          {isActive && (
+                            <span className="flex shrink-0 items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-white backdrop-blur">
+                              <span className="relative flex h-1.5 w-1.5">
+                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-200 opacity-75" />
+                                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-200" />
+                              </span>
+                              live · {order + 1}
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="mt-4 space-y-3">
+                          <div className={`flex items-center gap-3 transition-opacity ${isActive ? "opacity-100" : "pointer-events-none opacity-0"}`}>
+                            <span className="font-mono text-[10px] uppercase tracking-widest text-white/60">vol</span>
+                            <input
+                              type="range" min={0} max={1} step={0.01}
+                              value={volumes[s.id] ?? 0.7}
+                              onChange={(e) => setVolumes((v) => ({ ...v, [s.id]: parseFloat(e.target.value) }))}
+                              className="h-1 flex-1 cursor-pointer appearance-none rounded-full bg-white/20 accent-amber-200"
+                            />
+                          </div>
+                          <button
+                            onClick={() => toggle(s.id)}
+                            className={[
+                              "w-full rounded-xl px-4 py-2.5 text-xs font-medium uppercase tracking-[0.2em] transition",
+                              isActive ? "bg-white text-black hover:bg-white/90" : "bg-white/10 text-white backdrop-blur hover:bg-white/20",
+                            ].join(" ")}
+                          >
+                            {isActive ? "Stop" : "Play"}
+                          </button>
+                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            </section>
+          );
+        })}
+
+        <footer className="mt-14 flex flex-wrap items-center justify-between gap-3 border-t border-foreground/10 pt-6 font-mono text-[11px] uppercase tracking-[0.3em] text-foreground/50">
           <span>{active.length}/{MAX_ACTIVE} sounds playing</span>
-          <span>pick a second card to layer</span>
+          <span>{SOUNDS.length} ambiences · 5 sections</span>
         </footer>
       </main>
     </div>
