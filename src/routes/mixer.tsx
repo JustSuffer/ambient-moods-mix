@@ -49,10 +49,10 @@ const SOUNDS: SoundDef[] = [
   // ───────── Nature ─────────
   { id: "rain", title: "Window Rain", subtitle: "Soft drops tapping the glass",
     tag: "rain", section: "Nature", bg: bgRain, accent: "from-sky-300/60 to-slate-100/10",
-    src: mix(1248) },
+    src: "https://archive.org/download/aporee_2104_35714/berlinBuerkner9HhofEisregen160223.mp3" },
   { id: "fire", title: "Fireplace", subtitle: "Crackling flames · warm embers",
     tag: "fire", section: "Nature", bg: bgFire, accent: "from-orange-400/70 to-yellow-200/10",
-    src: mix(1326) },
+    src: "https://archive.org/download/crackling-fireplace_daniel-simion/crackling-fireplace_daniel-simion.mp3" },
   { id: "brook", title: "Babbling Brook", subtitle: "Clear stream over mossy stones",
     tag: "water", section: "Nature", bg: bgBrook, accent: "from-emerald-300/60 to-cyan-100/10",
     src: mix(1180) },
