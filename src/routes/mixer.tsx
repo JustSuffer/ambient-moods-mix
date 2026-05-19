@@ -43,116 +43,78 @@ interface SoundDef {
   section: string;
 }
 
+const mix = (id: number) => `https://assets.mixkit.co/active_storage/sfx/${id}/${id}-preview.mp3`;
+
 const SOUNDS: SoundDef[] = [
   // ───────── Nature ─────────
-  {
-    id: "rain", title: "Window Rain", subtitle: "Soft drops tapping the glass",
+  { id: "rain", title: "Window Rain", subtitle: "Soft drops tapping the glass",
     tag: "rain", section: "Nature", bg: bgRain, accent: "from-sky-300/60 to-slate-100/10",
-    src: "https://archive.org/download/aporee_2104_35714/berlinBuerkner9HhofEisregen160223.mp3",
-  },
-  {
-    id: "fire", title: "Fireplace", subtitle: "Crackling flames · warm embers",
+    src: mix(1248) },
+  { id: "fire", title: "Fireplace", subtitle: "Crackling flames · warm embers",
     tag: "fire", section: "Nature", bg: bgFire, accent: "from-orange-400/70 to-yellow-200/10",
-    src: "https://archive.org/download/crackling-fireplace_daniel-simion/crackling-fireplace_daniel-simion.mp3",
-  },
-  {
-    id: "brook", title: "Babbling Brook", subtitle: "Clear stream over mossy stones",
+    src: mix(1326) },
+  { id: "brook", title: "Babbling Brook", subtitle: "Clear stream over mossy stones",
     tag: "water", section: "Nature", bg: bgBrook, accent: "from-emerald-300/60 to-cyan-100/10",
-    src: "https://archive.org/download/water-stream_daniel-simion/water-stream_daniel-simion.mp3",
-  },
-  {
-    id: "woods", title: "Morning Woods", subtitle: "Birdsong and rustling leaves",
+    src: mix(1180) },
+  { id: "woods", title: "Morning Woods", subtitle: "Birdsong and rustling leaves",
     tag: "forest", section: "Nature", bg: bgWoods, accent: "from-lime-300/60 to-amber-100/10",
-    src: "https://archive.org/download/BirdsChirping_201805/Birds%20Chirping.mp3",
-  },
-  {
-    id: "thunder", title: "Distant Thunderstorm", subtitle: "Rolling thunder beyond the plains",
+    src: mix(1210) },
+  { id: "thunder", title: "Distant Thunderstorm", subtitle: "Rolling thunder beyond the plains",
     tag: "storm", section: "Nature", bg: bgThunder, accent: "from-indigo-400/60 to-slate-100/10",
-    src: "https://archive.org/download/thunder-sounds/thunder-sound-effect.mp3",
-  },
-  {
-    id: "surf", title: "Midnight Surf", subtitle: "Slow deep ocean waves",
+    src: mix(1258) },
+  { id: "surf", title: "Midnight Surf", subtitle: "Slow deep ocean waves",
     tag: "ocean", section: "Nature", bg: bgSurf, accent: "from-blue-400/60 to-indigo-200/10",
-    src: "https://archive.org/download/ocean-waves_202003/ocean-waves.mp3",
-  },
+    src: mix(1172) },
 
   // ───────── Urban & Life ─────────
-  {
-    id: "coffee", title: "Bustling Coffee Shop", subtitle: "Espresso hisses and quiet chatter",
+  { id: "coffee", title: "Bustling Coffee Shop", subtitle: "Espresso hisses and quiet chatter",
     tag: "café", section: "Urban & Life", bg: bgCoffee, accent: "from-amber-400/60 to-orange-100/10",
-    src: "https://archive.org/download/coffee-shop-ambience/coffee-shop-ambience.mp3",
-  },
-  {
-    id: "library", title: "Old Library", subtitle: "Turning pages, silent halls",
+    src: mix(133) },
+  { id: "library", title: "Old Library", subtitle: "Turning pages, silent halls",
     tag: "silence", section: "Urban & Life", bg: bgLibrary, accent: "from-stone-300/60 to-amber-100/10",
-    src: "https://archive.org/download/library-ambience/library-ambience.mp3",
-  },
-  {
-    id: "train", title: "Night Train Journey", subtitle: "Rhythmic wheels on the rails",
+    src: mix(123) },
+  { id: "train", title: "Night Train Journey", subtitle: "Rhythmic wheels on the rails",
     tag: "travel", section: "Urban & Life", bg: bgTrain, accent: "from-yellow-300/50 to-zinc-200/10",
-    src: "https://archive.org/download/train-interior_daniel-simion/train-interior_daniel-simion.mp3",
-  },
-  {
-    id: "keyboard", title: "Mechanical Keyboard", subtitle: "Tactile clack of focused typing",
+    src: mix(1628) },
+  { id: "keyboard", title: "Mechanical Keyboard", subtitle: "Tactile clack of focused typing",
     tag: "productivity", section: "Urban & Life", bg: bgKeyboard, accent: "from-rose-400/60 to-violet-200/10",
-    src: "https://archive.org/download/mechanical-keyboard-typing/mechanical-keyboard.mp3",
-  },
-  {
-    id: "server", title: "Server Room Hum", subtitle: "Low hypnotic machine drone",
+    src: mix(1386) },
+  { id: "server", title: "Server Room Hum", subtitle: "Low hypnotic machine drone",
     tag: "drone", section: "Urban & Life", bg: bgServer, accent: "from-cyan-400/60 to-blue-200/10",
-    src: "https://archive.org/download/server-room-hum/server-room-hum.mp3",
-  },
+    src: mix(2636) },
 
   // ───────── Music ─────────
-  {
-    id: "lofi", title: "Sofi's Room", subtitle: "Lofi beats · late night study",
+  { id: "lofi", title: "Sofi's Room", subtitle: "Lofi beats · late night study",
     tag: "lofi", section: "Music", bg: bgLofi, accent: "from-rose-300/60 to-rose-100/10",
-    src: "https://archive.org/download/jamendo-429174/01-1817528-Alexey%20Anisimov-Lo-Fi%20Chill%20Hip-Hop%20_Instrumental_.mp3",
-  },
-  {
-    id: "classical", title: "Classical Masterpieces", subtitle: "Mind-opening, mathematical pieces",
+    src: "https://archive.org/download/jamendo-429174/01-1817528-Alexey%20Anisimov-Lo-Fi%20Chill%20Hip-Hop%20_Instrumental_.mp3" },
+  { id: "classical", title: "Classical Masterpieces", subtitle: "Mind-opening, mathematical pieces",
     tag: "classical", section: "Music", bg: bgClassical, accent: "from-amber-300/60 to-yellow-100/10",
-    src: "https://archive.org/download/MozartPianoConcertoNo.21AndanteElviraMadigan/Mozart-PianoConcertoNo.21-Andante.mp3",
-  },
-  {
-    id: "strings", title: "Melancholic Strings", subtitle: "Solo piano and violin reflections",
+    src: mix(1941) },
+  { id: "strings", title: "Melancholic Strings", subtitle: "Solo piano and violin reflections",
     tag: "strings", section: "Music", bg: bgStrings, accent: "from-violet-300/60 to-rose-100/10",
-    src: "https://archive.org/download/MoonlightSonata_755/Beethoven-MoonlightSonata.mp3",
-  },
-  {
-    id: "chimes", title: "Wind Chimes", subtitle: "Random meditative wooden tones",
+    src: "https://archive.org/download/MoonlightSonata_755/Beethoven-MoonlightSonata.mp3" },
+  { id: "chimes", title: "Wind Chimes", subtitle: "Random meditative wooden tones",
     tag: "meditation", section: "Music", bg: bgChimes, accent: "from-pink-300/60 to-amber-100/10",
-    src: "https://archive.org/download/wind-chimes_daniel-simion/wind-chimes_daniel-simion.mp3",
-  },
+    src: mix(1046) },
 
   // ───────── Fantasy & Focus ─────────
-  {
-    id: "darksouls", title: "Middle Earth", subtitle: "Boss fight · grand orchestral dread",
+  { id: "darksouls", title: "Middle Earth", subtitle: "Boss fight · grand orchestral dread",
     tag: "dark fantasy", section: "Fantasy & Focus", bg: bgDarkSouls, accent: "from-amber-300/60 to-amber-100/10",
-    src: "https://archive.org/download/great-grey-wolf-sif/Gwyn%2C%20Lord%20of%20Cinder.mp3",
-  },
-  {
-    id: "elden", title: "Elden's Echo", subtitle: "Ancient ruined world · golden silence",
+    src: "https://archive.org/download/great-grey-wolf-sif/Gwyn%2C%20Lord%20of%20Cinder.mp3" },
+  { id: "elden", title: "Elden's Echo", subtitle: "Ancient ruined world · golden silence",
     tag: "epic", section: "Fantasy & Focus", bg: bgElden, accent: "from-yellow-400/60 to-amber-100/10",
-    src: "https://archive.org/download/wind-howling/wind-howling.mp3",
-  },
-  {
-    id: "tavern", title: "Tavern of Acoria", subtitle: "Dim inn · fire, mugs, distant lute",
+    src: mix(2279) },
+  { id: "tavern", title: "Tavern of Acoria", subtitle: "Dim inn · fire, mugs, distant lute",
     tag: "tavern", section: "Fantasy & Focus", bg: bgTavern, accent: "from-orange-400/60 to-yellow-100/10",
-    src: "https://archive.org/download/medieval-tavern-ambience/medieval-tavern.mp3",
-  },
-  {
-    id: "dojo", title: "Zen Dojo", subtitle: "Bamboo whisper · disciplined calm",
+    src: mix(1958) },
+  { id: "dojo", title: "Zen Dojo", subtitle: "Bamboo whisper · disciplined calm",
     tag: "zen", section: "Fantasy & Focus", bg: bgDojo, accent: "from-emerald-300/60 to-stone-200/10",
-    src: "https://archive.org/download/bamboo-wind-chimes/bamboo-wind.mp3",
-  },
+    src: mix(1153) },
 
   // ───────── Pure Frequency ─────────
-  {
-    id: "whitenoise", title: "Deep White Noise", subtitle: "Pure acoustic frequency mask",
+  { id: "whitenoise", title: "Deep White Noise", subtitle: "Pure acoustic frequency mask",
     tag: "white noise", section: "Pure Frequency", bg: bgWhiteNoise, accent: "from-zinc-300/60 to-zinc-100/10",
-    src: "https://archive.org/download/WhiteNoise_201808/WhiteNoise.mp3",
-  },
+    src: mix(1041) },
 ];
 
 const SECTIONS = ["Nature", "Urban & Life", "Music", "Fantasy & Focus", "Pure Frequency"] as const;
