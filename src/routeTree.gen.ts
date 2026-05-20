@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SignupRouteImport } from './routes/signup'
+import { Route as PomodoroRouteImport } from './routes/pomodoro'
 import { Route as MixerRouteImport } from './routes/mixer'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LeaderboardRouteImport } from './routes/leaderboard'
@@ -19,6 +20,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PomodoroRoute = PomodoroRouteImport.update({
+  id: '/pomodoro',
+  path: '/pomodoro',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MixerRoute = MixerRouteImport.update({
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/leaderboard': typeof LeaderboardRoute
   '/login': typeof LoginRoute
   '/mixer': typeof MixerRoute
+  '/pomodoro': typeof PomodoroRoute
   '/signup': typeof SignupRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/leaderboard': typeof LeaderboardRoute
   '/login': typeof LoginRoute
   '/mixer': typeof MixerRoute
+  '/pomodoro': typeof PomodoroRoute
   '/signup': typeof SignupRoute
 }
 export interface FileRoutesById {
@@ -70,13 +78,28 @@ export interface FileRoutesById {
   '/leaderboard': typeof LeaderboardRoute
   '/login': typeof LoginRoute
   '/mixer': typeof MixerRoute
+  '/pomodoro': typeof PomodoroRoute
   '/signup': typeof SignupRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/leaderboard' | '/login' | '/mixer' | '/signup'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/leaderboard'
+    | '/login'
+    | '/mixer'
+    | '/pomodoro'
+    | '/signup'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/leaderboard' | '/login' | '/mixer' | '/signup'
+  to:
+    | '/'
+    | '/about'
+    | '/leaderboard'
+    | '/login'
+    | '/mixer'
+    | '/pomodoro'
+    | '/signup'
   id:
     | '__root__'
     | '/'
@@ -84,6 +107,7 @@ export interface FileRouteTypes {
     | '/leaderboard'
     | '/login'
     | '/mixer'
+    | '/pomodoro'
     | '/signup'
   fileRoutesById: FileRoutesById
 }
@@ -93,6 +117,7 @@ export interface RootRouteChildren {
   LeaderboardRoute: typeof LeaderboardRoute
   LoginRoute: typeof LoginRoute
   MixerRoute: typeof MixerRoute
+  PomodoroRoute: typeof PomodoroRoute
   SignupRoute: typeof SignupRoute
 }
 
@@ -103,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/signup'
       fullPath: '/signup'
       preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pomodoro': {
+      id: '/pomodoro'
+      path: '/pomodoro'
+      fullPath: '/pomodoro'
+      preLoaderRoute: typeof PomodoroRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mixer': {
@@ -149,6 +181,7 @@ const rootRouteChildren: RootRouteChildren = {
   LeaderboardRoute: LeaderboardRoute,
   LoginRoute: LoginRoute,
   MixerRoute: MixerRoute,
+  PomodoroRoute: PomodoroRoute,
   SignupRoute: SignupRoute,
 }
 export const routeTree = rootRouteImport
