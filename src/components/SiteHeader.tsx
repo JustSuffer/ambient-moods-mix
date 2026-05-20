@@ -1,8 +1,25 @@
 import { Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
+import { useServerFn } from "@tanstack/react-start";
+import { getMyProfile } from "@/lib/coins.functions";
 
 export function SiteHeader() {
   const { user, signOut } = useAuth();
+  const fetchProfile = useServerFn(getMyProfile);
+  const [coins, setCoins] = useState<number | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    if (!user) { setCoins(null); return; }
+    fetchProfile({})
+      .then((r) => { if (!cancelled) setCoins(r.profile.coins ?? 0); })
+      .catch(() => {});
+    const id = setInterval(() => {
+      fetchProfile({}).then((r) => { if (!cancelled) setCoins(r.profile.coins ?? 0); }).catch(() => {});
+    }, 30000);
+    return () => { cancelled = true; clearInterval(id); };
+  }, [user, fetchProfile]);
 
   return (
     <header className="sticky top-0 z-50 border-b border-foreground/10 bg-background/70 backdrop-blur">
@@ -12,31 +29,29 @@ export function SiteHeader() {
           <span>Your<em className="italic text-amber-200/90">Ambience</em></span>
         </Link>
         <div className="flex items-center gap-5 font-mono text-[11px] uppercase tracking-[0.25em] text-foreground/70">
-          <Link to="/" activeOptions={{ exact: true }} activeProps={{ className: "text-foreground" }} className="hover:text-foreground">
-            Home
-          </Link>
-          <Link to="/mixer" activeProps={{ className: "text-foreground" }} className="hover:text-foreground">
-            Mixer
-          </Link>
-          <Link to="/about" activeProps={{ className: "text-foreground" }} className="hover:text-foreground">
-            About
-          </Link>
+          <Link to="/" activeOptions={{ exact: true }} activeProps={{ className: "text-foreground" }} className="hover:text-foreground">Home</Link>
+          <Link to="/mixer" activeProps={{ className: "text-foreground" }} className="hover:text-foreground">Mixer</Link>
+          <Link to="/pomodoro" activeProps={{ className: "text-foreground" }} className="hover:text-foreground">Pomodoro</Link>
+          <Link to="/leaderboard" activeProps={{ className: "text-foreground" }} className="hover:text-foreground">Leaderboard</Link>
+          <Link to="/about" activeProps={{ className: "text-foreground" }} className="hover:text-foreground">About</Link>
           {user ? (
-            <button
-              onClick={() => signOut()}
-              className="rounded-full border border-foreground/20 px-3 py-1.5 hover:border-foreground/50"
-            >
-              Sign out
-            </button>
+            <>
+              {coins !== null && (
+                <span className="rounded-full border border-amber-200/40 bg-amber-200/10 px-3 py-1.5 text-amber-100">
+                  ◈ {coins}
+                </span>
+              )}
+              <button
+                onClick={() => signOut()}
+                className="rounded-full border border-foreground/20 px-3 py-1.5 hover:border-foreground/50"
+              >
+                Sign out
+              </button>
+            </>
           ) : (
             <>
               <Link to="/login" className="hover:text-foreground">Log in</Link>
-              <Link
-                to="/signup"
-                className="rounded-full bg-white px-3 py-1.5 text-black hover:bg-white/90"
-              >
-                Sign up
-              </Link>
+              <Link to="/signup" className="rounded-full bg-white px-3 py-1.5 text-black hover:bg-white/90">Sign up</Link>
             </>
           )}
         </div>
