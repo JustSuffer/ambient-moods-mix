@@ -142,3 +142,22 @@
     color: var(--color-foreground);
   }
 }
+
+@keyframes pan-slow {
+  0% {
+    background-position: 0% 50%;
+    background-size: 105%;
+  }
+  50% {
+    background-position: 100% 50%;
+    background-size: 115%;
+  }
+  100% {
+    background-position: 0% 50%;
+    background-size: 105%;
+  }
+}
+
+.animate-pan-slow {
+  animation: pan-slow 120s ease-in-out infinite;
+}
