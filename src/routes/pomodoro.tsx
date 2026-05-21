@@ -38,6 +38,9 @@ function PomodoroPage() {
   const [currentSet, setCurrentSet] = useState(1);
   const [remaining, setRemaining] = useState(0); // seconds
   const [running, setRunning] = useState(false);
+  const [volumes, setVolumes] = useState<Record<string, number>>(() =>
+    Object.fromEntries(SOUNDS.map((s) => [s.id, 0.55]))
+  );
 
   // pending coins (minutes of work completed since last award)
   const pendingMinutesRef = useRef(0);
@@ -95,11 +98,11 @@ function PomodoroPage() {
       const el = audioRefs.current[s.id];
       if (!el) return;
       const wants = cfg.picked.includes(s.id) && (phase === "work" || phase === "break");
-      el.volume = 0.55;
+      el.volume = volumes[s.id] ?? 0.55;
       if (wants && el.paused) el.play().catch(() => {});
       if (!wants && !el.paused) el.pause();
     });
-  }, [cfg.picked, phase]);
+  }, [cfg.picked, phase, volumes]);
 
   const startSession = () => {
     setConfigured(true);
