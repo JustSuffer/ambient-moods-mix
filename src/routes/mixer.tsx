@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
-import { PomodoroTimer } from "@/components/PomodoroTimer";
 import { SOUNDS, SECTIONS, MAX_ACTIVE } from "@/lib/sounds";
 
 export const Route = createFileRoute("/mixer")({
@@ -16,7 +15,6 @@ export const Route = createFileRoute("/mixer")({
 
 function Mixer() {
   const [active, setActive] = useState<string[]>([]);
-  const [isFocusMode, setIsFocusMode] = useState(false);
   const [volumes, setVolumes] = useState<Record<string, number>>(
     () => Object.fromEntries(SOUNDS.map((s) => [s.id, 0.7]))
   );
@@ -118,28 +116,22 @@ function Mixer() {
         />
       ))}
 
-      {!isFocusMode && <SiteHeader />}
+      <SiteHeader />
 
-      <main className={`mx-auto flex max-w-7xl flex-col px-6 py-10 md:px-10 md:py-14 transition-opacity duration-1000 ${isFocusMode ? 'opacity-0 pointer-events-none h-0 overflow-hidden py-0' : 'opacity-100'}`}>
+      <main className="mx-auto flex max-w-7xl flex-col px-6 py-10 md:px-10 md:py-14">
         <header className="flex items-start justify-between gap-6">
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.35em] text-foreground/60">
               The mixer
             </p>
             <h1 className="mt-3 font-serif text-4xl leading-[0.95] tracking-tight md:text-5xl">
-              Twenty worlds. <em className="italic text-amber-200/90">Two at a time.</em>
+              Many worlds. <em className="italic text-amber-200/90">Two at a time.</em>
             </h1>
             <p className="mt-3 max-w-xl text-sm text-foreground/70 md:text-base">
               Pick from five sections. Layer any two sounds. Tune their volumes independently.
             </p>
           </div>
           <div className="hidden shrink-0 items-center gap-3 md:flex">
-            <button
-              onClick={() => setIsFocusMode(true)}
-              className="rounded-full bg-amber-950/80 border border-amber-600/50 text-amber-200 px-5 py-2.5 text-xs font-serif uppercase tracking-widest shadow-[0_0_15px_rgba(217,119,6,0.2)] transition hover:scale-105 hover:bg-amber-900"
-            >
-              Enter Focus Mode
-            </button>
             <button
               onClick={stopAll}
               disabled={active.length === 0}
@@ -236,17 +228,6 @@ function Mixer() {
           <span>{SOUNDS.length} ambiences · 5 sections</span>
         </footer>
       </main>
-
-      {/* Focus Mode Overlay */}
-      <div className={`fixed inset-0 z-50 flex flex-col items-center justify-center transition-all duration-1000 ${isFocusMode ? 'opacity-100 pointer-events-auto backdrop-blur-sm bg-black/40' : 'opacity-0 pointer-events-none'}`}>
-        <button 
-          onClick={() => setIsFocusMode(false)}
-          className="absolute top-10 right-10 z-50 rounded-full bg-black/60 border border-foreground/20 px-6 py-2.5 font-serif text-xs uppercase tracking-widest text-white/80 hover:bg-white hover:text-black transition-all"
-        >
-          Exit Focus Mode
-        </button>
-        {isFocusMode && <PomodoroTimer />}
-      </div>
     </div>
   );
 }

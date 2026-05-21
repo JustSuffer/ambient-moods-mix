@@ -38,6 +38,9 @@ function PomodoroPage() {
   const [currentSet, setCurrentSet] = useState(1);
   const [remaining, setRemaining] = useState(0); // seconds
   const [running, setRunning] = useState(false);
+  const [volumes, setVolumes] = useState<Record<string, number>>(() =>
+    Object.fromEntries(SOUNDS.map((s) => [s.id, 0.55]))
+  );
 
   // pending coins (minutes of work completed since last award)
   const pendingMinutesRef = useRef(0);
@@ -95,11 +98,11 @@ function PomodoroPage() {
       const el = audioRefs.current[s.id];
       if (!el) return;
       const wants = cfg.picked.includes(s.id) && (phase === "work" || phase === "break");
-      el.volume = 0.55;
+      el.volume = volumes[s.id] ?? 0.55;
       if (wants && el.paused) el.play().catch(() => {});
       if (!wants && !el.paused) el.pause();
     });
-  }, [cfg.picked, phase]);
+  }, [cfg.picked, phase, volumes]);
 
   const startSession = () => {
     setConfigured(true);
@@ -193,6 +196,9 @@ function PomodoroPage() {
             reset={reset}
             togglePick={togglePick}
             signedIn={!!user}
+            picked={picked}
+            volumes={volumes}
+            setVolumes={setVolumes}
           />
         )}
       </main>
@@ -305,13 +311,16 @@ function fmt(seconds: number) {
 
 function SessionView({
   cfg, setCfg, phase, currentSet, remaining, running, progress,
-  togglePause, skipPhase, reset, togglePick, signedIn,
+  togglePause, skipPhase, reset, togglePick, signedIn, picked, volumes, setVolumes,
 }: {
   cfg: Config;
   setCfg: (u: (c: Config) => Config) => void;
   phase: Phase; currentSet: number; remaining: number; running: boolean; progress: number;
   togglePause: () => void; skipPhase: () => void; reset: () => void;
   togglePick: (id: string) => void; signedIn: boolean;
+  picked: { id: string; title: string }[];
+  volumes: Record<string, number>;
+  setVolumes: React.Dispatch<React.SetStateAction<Record<string, number>>>;
 }) {
   const [edit, setEdit] = useState(false);
   const isWork = phase === "work";
@@ -397,6 +406,28 @@ function SessionView({
           </>
         )}
       </div>
+
+      {picked.length > 0 && phase !== "done" && (
+        <div className="mt-8 w-full max-w-xl rounded-2xl border border-amber-200/15 bg-black/40 px-5 py-4 backdrop-blur">
+          <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.3em] text-amber-200/70">Ambience volume</p>
+          <div className="space-y-3">
+            {picked.map((s) => (
+              <div key={s.id} className="flex items-center gap-3">
+                <span className="w-32 shrink-0 truncate text-left font-serif text-sm text-amber-100/90">{s.title}</span>
+                <input
+                  type="range" min={0} max={1} step={0.01}
+                  value={volumes[s.id] ?? 0.55}
+                  onChange={(e) => setVolumes((v) => ({ ...v, [s.id]: parseFloat(e.target.value) }))}
+                  className="h-1 flex-1 cursor-pointer appearance-none rounded-full bg-white/15 accent-amber-200"
+                />
+                <span className="w-10 text-right font-mono text-[10px] text-foreground/60">
+                  {Math.round((volumes[s.id] ?? 0.55) * 100)}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {!signedIn && phase !== "done" && (
         <p className="mt-5 max-w-md text-xs text-amber-100/70">
