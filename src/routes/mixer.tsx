@@ -35,8 +35,7 @@ function Mixer() {
     SOUNDS.forEach((s) => {
       const el = audioRefs.current[s.id];
       if (!el) return;
-      // Multiply the volume heavily so that noisy mixkit sounds become very quiet ambient background
-      el.volume = (volumes[s.id] ?? 0.7) * 0.35;
+      el.volume = volumes[s.id] ?? 0.7;
       if (active.includes(s.id)) {
         if (el.paused) el.play().catch(() => {});
       } else if (!el.paused) {
@@ -53,7 +52,7 @@ function Mixer() {
         return prev.filter((x) => x !== id);
       }
       if (el) {
-        el.volume = (volumes[id] ?? 0.7) * 0.35;
+        el.volume = volumes[id] ?? 0.7;
         el.play().catch(() => {});
       }
       if (prev.length >= MAX_ACTIVE) {
