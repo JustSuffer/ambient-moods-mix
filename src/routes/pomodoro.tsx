@@ -196,6 +196,9 @@ function PomodoroPage() {
             reset={reset}
             togglePick={togglePick}
             signedIn={!!user}
+            picked={picked}
+            volumes={volumes}
+            setVolumes={setVolumes}
           />
         )}
       </main>
@@ -308,13 +311,16 @@ function fmt(seconds: number) {
 
 function SessionView({
   cfg, setCfg, phase, currentSet, remaining, running, progress,
-  togglePause, skipPhase, reset, togglePick, signedIn,
+  togglePause, skipPhase, reset, togglePick, signedIn, picked, volumes, setVolumes,
 }: {
   cfg: Config;
   setCfg: (u: (c: Config) => Config) => void;
   phase: Phase; currentSet: number; remaining: number; running: boolean; progress: number;
   togglePause: () => void; skipPhase: () => void; reset: () => void;
   togglePick: (id: string) => void; signedIn: boolean;
+  picked: { id: string; title: string }[];
+  volumes: Record<string, number>;
+  setVolumes: React.Dispatch<React.SetStateAction<Record<string, number>>>;
 }) {
   const [edit, setEdit] = useState(false);
   const isWork = phase === "work";
