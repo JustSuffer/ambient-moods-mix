@@ -407,6 +407,28 @@ function SessionView({
         )}
       </div>
 
+      {picked.length > 0 && phase !== "done" && (
+        <div className="mt-8 w-full max-w-xl rounded-2xl border border-amber-200/15 bg-black/40 px-5 py-4 backdrop-blur">
+          <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.3em] text-amber-200/70">Ambience volume</p>
+          <div className="space-y-3">
+            {picked.map((s) => (
+              <div key={s.id} className="flex items-center gap-3">
+                <span className="w-32 shrink-0 truncate text-left font-serif text-sm text-amber-100/90">{s.title}</span>
+                <input
+                  type="range" min={0} max={1} step={0.01}
+                  value={volumes[s.id] ?? 0.55}
+                  onChange={(e) => setVolumes((v) => ({ ...v, [s.id]: parseFloat(e.target.value) }))}
+                  className="h-1 flex-1 cursor-pointer appearance-none rounded-full bg-white/15 accent-amber-200"
+                />
+                <span className="w-10 text-right font-mono text-[10px] text-foreground/60">
+                  {Math.round((volumes[s.id] ?? 0.55) * 100)}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {!signedIn && phase !== "done" && (
         <p className="mt-5 max-w-md text-xs text-amber-100/70">
           Sign in to earn ambience coins for completed focus minutes. <Link to="/login" className="underline">Log in</Link>
