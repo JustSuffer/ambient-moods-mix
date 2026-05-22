@@ -322,7 +322,7 @@ function SessionView({
   phase: Phase; currentSet: number; remaining: number; running: boolean; progress: number;
   togglePause: () => void; skipPhase: () => void; reset: () => void;
   togglePick: (id: string) => void; signedIn: boolean;
-  picked: { id: string; title: string }[];
+  picked: { id: string; title: string; bg: string }[];
   volumes: Record<string, number>;
   setVolumes: React.Dispatch<React.SetStateAction<Record<string, number>>>;
 }) {
