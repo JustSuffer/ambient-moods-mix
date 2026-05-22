@@ -415,20 +415,46 @@ function SessionView({
         <div className="mt-8 w-full max-w-xl rounded-2xl border border-amber-200/15 bg-black/40 px-5 py-4 backdrop-blur">
           <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.3em] text-amber-200/70">Ambience volume</p>
           <div className="space-y-3">
-            {picked.map((s) => (
-              <div key={s.id} className="flex items-center gap-3">
-                <span className="w-32 shrink-0 truncate text-left font-serif text-sm text-amber-100/90">{s.title}</span>
-                <input
-                  type="range" min={0} max={1} step={0.01}
-                  value={volumes[s.id] ?? 0.55}
-                  onChange={(e) => setVolumes((v) => ({ ...v, [s.id]: parseFloat(e.target.value) }))}
-                  className="h-1 flex-1 cursor-pointer appearance-none rounded-full bg-white/15 accent-amber-200"
-                />
-                <span className="w-10 text-right font-mono text-[10px] text-foreground/60">
-                  {Math.round((volumes[s.id] ?? 0.55) * 100)}
-                </span>
-              </div>
-            ))}
+            {picked.map((s) => {
+              const v = volumes[s.id] ?? 0.55;
+              const muted = v === 0;
+              const prevRef = (volumes[s.id + "__prev"] as unknown as number) ?? 0.55;
+              return (
+                <div key={s.id} className="flex items-center gap-3">
+                  <span className="w-32 shrink-0 truncate text-left font-serif text-sm text-amber-100/90">{s.title}</span>
+                  <button
+                    type="button"
+                    aria-label={muted ? "Unmute" : "Mute"}
+                    onClick={() =>
+                      setVolumes((cur) => {
+                        const curV = cur[s.id] ?? 0.55;
+                        if (curV === 0) {
+                          const restored = (cur[s.id + "__prev"] as number) || 0.55;
+                          return { ...cur, [s.id]: restored };
+                        }
+                        return { ...cur, [s.id + "__prev"]: curV, [s.id]: 0 };
+                      })
+                    }
+                    className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-foreground/20 text-amber-100/80 transition hover:border-amber-200/60 hover:text-amber-100"
+                  >
+                    {muted ? (
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                    ) : (
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                    )}
+                  </button>
+                  <input
+                    type="range" min={0} max={1} step={0.01}
+                    value={v}
+                    onChange={(e) => setVolumes((cv) => ({ ...cv, [s.id]: parseFloat(e.target.value) }))}
+                    className="h-1 flex-1 cursor-pointer appearance-none rounded-full bg-white/15 accent-amber-200"
+                  />
+                  <span className="w-10 text-right font-mono text-[10px] text-foreground/60">
+                    {Math.round(v * 100)}
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
