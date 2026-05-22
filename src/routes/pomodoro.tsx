@@ -418,7 +418,6 @@ function SessionView({
             {picked.map((s) => {
               const v = volumes[s.id] ?? 0.55;
               const muted = v === 0;
-              const prevRef = (volumes[s.id + "__prev"] as unknown as number) ?? 0.55;
               return (
                 <div key={s.id} className="flex items-center gap-3">
                   <span className="w-32 shrink-0 truncate text-left font-serif text-sm text-amber-100/90">{s.title}</span>
