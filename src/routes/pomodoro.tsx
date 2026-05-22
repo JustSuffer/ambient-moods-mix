@@ -159,12 +159,16 @@ function PomodoroPage() {
             <div
               key={s.id}
               className={`absolute inset-[-6%] bg-cover bg-center ${i === 0 ? "animate-[panLeft_60s_ease-in-out_infinite_alternate]" : "animate-[panRight_60s_ease-in-out_infinite_alternate]"}`}
-              style={{ backgroundImage: `url(${s.bg})`, clipPath: clip || undefined }}
+              style={{ backgroundImage: `url(${(s as any).bg})`, clipPath: clip || undefined }}
             />
           );
         })}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/95" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.75)_100%)]" />
+        {picked.length > 0 && (
+          <>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/20 to-black/55" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_25%,rgba(0,0,0,0.55)_100%)]" />
+          </>
+        )}
       </div>
 
       {/* invisible audio */}
