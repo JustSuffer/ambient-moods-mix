@@ -48,12 +48,12 @@ export const SOUNDS: SoundDef[] = [
     src: mix(1172) },
 
   // ───────── Urban & Life ─────────
-  { id: "coffee", title: "Quiet Coffee Shop", subtitle: "Warm murmur, gentle cups",
+  { id: "coffee", title: "Quiet Coffee Shop", subtitle: "Distant murmur, soft cups",
     tag: "café", section: "Urban & Life", bg: bgCoffee, accent: "from-amber-400/60 to-orange-100/10",
-    src: mix(133) },
+    src: "https://archive.org/download/coffee-shop-ambience/coffee-shop-ambience.mp3" },
   { id: "library", title: "Old Library", subtitle: "Pages turning in silence",
     tag: "silence", section: "Urban & Life", bg: bgLibrary, accent: "from-stone-300/60 to-amber-100/10",
-    src: mix(123) },
+    src: "https://archive.org/download/quiet-library-ambience/quiet-library-ambience.mp3" },
   { id: "train", title: "Night Train Journey", subtitle: "Soft rhythmic rails",
     tag: "travel", section: "Urban & Life", bg: bgTrain, accent: "from-yellow-300/50 to-zinc-200/10",
     src: mix(1628) },
