@@ -28,10 +28,10 @@ export const SOUNDS: SoundDef[] = [
   // ───────── Nature ─────────
   { id: "rain", title: "Window Rain", subtitle: "Soft drops tapping the glass",
     tag: "rain", section: "Nature", bg: bgRain, accent: "from-sky-300/60 to-slate-100/10",
-    src: "https://archive.org/download/aporee_2104_35714/berlinBuerkner9HhofEisregen160223.mp3" },
+    src: mix(1178) },
   { id: "fire", title: "Fireplace", subtitle: "Crackling flames · warm embers",
     tag: "fire", section: "Nature", bg: bgFire, accent: "from-orange-400/70 to-yellow-200/10",
-    src: "https://archive.org/download/crackling-fireplace_daniel-simion/crackling-fireplace_daniel-simion.mp3" },
+    src: mix(1179) },
   { id: "woods", title: "Morning Woods", subtitle: "Distant birdsong, soft breeze",
     tag: "forest", section: "Nature", bg: bgWoods, accent: "from-lime-300/60 to-amber-100/10",
     src: mix(1210) },
@@ -50,7 +50,7 @@ export const SOUNDS: SoundDef[] = [
   // ───────── Music ─────────
   { id: "lofi", title: "Sofi's Room", subtitle: "Lofi beats · late night study",
     tag: "lofi", section: "Music", bg: bgLofi, accent: "from-rose-300/60 to-rose-100/10",
-    src: "https://archive.org/download/jamendo-429174/01-1817528-Alexey%20Anisimov-Lo-Fi%20Chill%20Hip-Hop%20_Instrumental_.mp3" },
+    src: mix(130) },
 
   // ───────── Fantasy & Focus ─────────
   { id: "darksouls", title: "Middle Earth", subtitle: "Ancient calm of distant hills",
@@ -66,16 +66,16 @@ export const SOUNDS: SoundDef[] = [
     src: mix(1041) },
   { id: "pinknoise", title: "Pink Noise", subtitle: "Softer highs · balanced energy",
     tag: "pink noise", section: "Pure Frequency", bg: bgPinkNoise, accent: "from-pink-400/60 to-rose-200/10",
-    src: "https://archive.org/download/pink_noise_202004/pink_noise.mp3" },
+    src: mix(1042) },
   { id: "brownnoise", title: "Brown Noise", subtitle: "Deep, rumbling low-end mask",
     tag: "brown noise", section: "Pure Frequency", bg: bgBrownNoise, accent: "from-amber-700/60 to-stone-300/10",
-    src: "https://archive.org/download/brown-noise/Brown%20Noise.mp3" },
+    src: mix(2000) },
   { id: "432hz", title: "432 Hz Harmonic Tone", subtitle: "Healing frequency · pairs with Pink Noise",
     tag: "432 hz", section: "Pure Frequency", bg: bgPinkNoise, accent: "from-purple-400/60 to-fuchsia-200/10",
-    src: "https://archive.org/download/432HzTuningFork/432Hz.mp3" },
+    src: mix(2001) },
   { id: "528hz", title: "528 Hz Deep Tone", subtitle: "Solfeggio frequency · pairs with Brown Noise",
     tag: "528 hz", section: "Pure Frequency", bg: bgBrownNoise, accent: "from-emerald-700/60 to-teal-300/10",
-    src: "https://archive.org/download/528Hz_201802/528Hz.mp3" },
+    src: mix(1210) },
 ];
 
 export const SECTIONS = ["Nature", "Urban & Life", "Music", "Fantasy & Focus", "Pure Frequency"] as const;
