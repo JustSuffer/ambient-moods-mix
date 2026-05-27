@@ -112,7 +112,6 @@ function Mixer() {
           src={s.src}
           loop
           preload="auto"
-          crossOrigin="anonymous"
         />
       ))}
 
