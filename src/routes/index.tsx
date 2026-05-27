@@ -1,91 +1,85 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { Suspense, lazy } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
-import bgDarkSouls from "@/assets/bg-darksouls.png";
-import bgLofi from "@/assets/bg-lofi.png";
-import bgFire from "@/assets/bg-fire.png";
-import bgRain from "@/assets/bg-rain.jpg";
+
+// Dynamically import the Canvas so it doesn't cause SSR issues
+const Canvas = lazy(() => import("@react-three/fiber").then((m) => ({ default: m.Canvas })));
+const SpiralGallery = lazy(() => import("@/components/SpiralGallery").then((m) => ({ default: m.SpiralGallery })));
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "YourAmbience — Layer your perfect atmosphere" },
+      { title: "CODE 6 — Spiral Image Gallery" },
       {
         name: "description",
-        content:
-          "Mix rain, fireplace, lofi beats, and dark fantasy boss music. Layer up to two ambient sounds to craft your own atmosphere.",
+        content: "An atmospheric editorial-gallery website built around a 3D spiral image installation.",
       },
     ],
   }),
   component: Landing,
 });
 
-const tiles = [
-  { bg: bgDarkSouls, title: "Middle Earth", tag: "dark fantasy" },
-  { bg: bgLofi, title: "Sofi's Room", tag: "lofi" },
-  { bg: bgFire, title: "Fireplace", tag: "fire" },
-  { bg: bgRain, title: "Window Rain", tag: "rain" },
-];
-
 function Landing() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-[300vh] bg-[#050505] text-white selection:bg-white selection:text-black overflow-hidden relative">
       <SiteHeader />
 
-      <section className="mx-auto max-w-6xl px-6 pb-16 pt-20 md:pt-28">
-        <p className="font-mono text-[11px] uppercase tracking-[0.35em] text-foreground/60">
-          YourAmbience · v1
-        </p>
-        <h1 className="mt-4 font-serif text-5xl leading-[0.95] tracking-tight md:text-7xl">
-          Mix your own <em className="italic text-amber-200/90">atmosphere</em>.
-        </h1>
-        <p className="mt-6 max-w-xl text-base text-foreground/70 md:text-lg">
-          Four distinct worlds — boss-fight orchestras, lofi beats, crackling
-          fire, soft window rain. Layer up to two at once and let the mood take
-          over.
-        </p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Link
-            to="/mixer"
-            className="rounded-full bg-white px-6 py-3 text-sm font-medium uppercase tracking-[0.2em] text-black transition hover:bg-white/90"
-          >
-            Open the mixer
-          </Link>
-          <Link
-            to="/signup"
-            className="rounded-full border border-foreground/30 px-6 py-3 text-sm font-medium uppercase tracking-[0.2em] text-foreground transition hover:border-foreground/60"
-          >
-            Create account
-          </Link>
-        </div>
-      </section>
+      {/* 3D Canvas Background */}
+      <div className="fixed inset-0 z-0 pointer-events-auto">
+        <Suspense fallback={null}>
+          <Canvas camera={{ position: [0, 0, 8], fov: 40 }}>
+            <fog attach="fog" args={['#050505', 5, 15]} />
+            <ambientLight intensity={0.2} />
+            <SpiralGallery />
+          </Canvas>
+        </Suspense>
+      </div>
 
-      <section className="mx-auto grid max-w-6xl grid-cols-2 gap-3 px-6 pb-24 md:grid-cols-4 md:gap-4">
-        {tiles.map((t) => (
-          <div
-            key={t.title}
-            className="group relative aspect-[3/4] overflow-hidden rounded-xl border border-foreground/10"
-          >
-            <div
-              className="absolute inset-0 bg-cover bg-center transition-transform duration-[1200ms] group-hover:scale-110"
-              style={{ backgroundImage: `url(${t.bg})` }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 p-4">
-              <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/70">
-                {t.tag}
-              </p>
-              <h3 className="mt-1 font-serif text-lg text-white md:text-xl">{t.title}</h3>
-            </div>
+      {/* Editorial UI Overlay */}
+      <div className="fixed inset-0 z-10 pointer-events-none flex flex-col justify-between p-6 md:p-12 mix-blend-difference">
+        
+        <header className="flex justify-between items-start pt-16">
+          <div className="flex flex-col gap-1 text-[10px] uppercase tracking-[0.3em] font-mono text-white/50">
+            <span>Registration: C-06</span>
+            <span>Studio Dialect</span>
           </div>
-        ))}
-      </section>
+          <div className="flex gap-8 text-[10px] uppercase tracking-[0.2em] font-mono">
+            <Link to="/about" className="pointer-events-auto hover:text-white/70 transition-colors">Method</Link>
+            <Link to="/mixer" className="pointer-events-auto hover:text-white/70 transition-colors">Archive</Link>
+          </div>
+        </header>
 
-      <footer className="border-t border-foreground/10">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-6 py-6 font-mono text-[11px] uppercase tracking-[0.3em] text-foreground/50">
-          <span>© YourAmbience</span>
-          <Link to="/about" className="hover:text-foreground">About</Link>
-        </div>
-      </footer>
+        <main className="max-w-4xl">
+          <h1 className="font-display text-7xl md:text-[9rem] leading-[0.85] tracking-tight uppercase text-white drop-shadow-2xl">
+            Between Structure<br />
+            <span className="text-white/40">& Disorder</span>
+          </h1>
+          <p className="mt-8 font-mono text-xs uppercase tracking-[0.2em] max-w-sm text-white/60 leading-relaxed">
+            A shader-lit ribbon of image tiles. Scroll alters rotation. Pointer introduces subtle parallax. New forms begin here.
+          </p>
+          
+          <div className="mt-12">
+            <Link
+              to="/mixer"
+              className="pointer-events-auto inline-block border border-white/20 px-6 py-3 text-[10px] font-mono uppercase tracking-[0.3em] text-white transition-all hover:bg-white hover:text-black"
+            >
+              Enter Installation
+            </Link>
+          </div>
+        </main>
+
+        <footer className="flex justify-between items-end pb-4 font-mono text-[9px] uppercase tracking-[0.4em] text-white/40">
+          <span>01 / Scroll Field</span>
+          <div className="flex gap-2">
+            <span className="w-12 h-[1px] bg-white/20 mb-1" />
+            <span>WebGL System Active</span>
+          </div>
+        </footer>
+        
+      </div>
+      
+      {/* Noise Texture Overlay */}
+      <div className="fixed inset-0 z-50 pointer-events-none opacity-[0.03] mix-blend-overlay" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
     </div>
   );
 }
