@@ -70,6 +70,12 @@ export const SOUNDS: SoundDef[] = [
   { id: "brownnoise", title: "Brown Noise", subtitle: "Deep, rumbling low-end mask",
     tag: "brown noise", section: "Pure Frequency", bg: bgBrownNoise, accent: "from-amber-700/60 to-stone-300/10",
     src: "https://archive.org/download/brown-noise/Brown%20Noise.mp3" },
+  { id: "432hz", title: "432 Hz Harmonic Tone", subtitle: "Healing frequency · pairs with Pink Noise",
+    tag: "432 hz", section: "Pure Frequency", bg: bgPinkNoise, accent: "from-purple-400/60 to-fuchsia-200/10",
+    src: "https://archive.org/download/432HzTuningFork/432Hz.mp3" },
+  { id: "528hz", title: "528 Hz Deep Tone", subtitle: "Solfeggio frequency · pairs with Brown Noise",
+    tag: "528 hz", section: "Pure Frequency", bg: bgBrownNoise, accent: "from-emerald-700/60 to-teal-300/10",
+    src: "https://archive.org/download/528Hz_201802/528Hz.mp3" },
 ];
 
 export const SECTIONS = ["Nature", "Urban & Life", "Music", "Fantasy & Focus", "Pure Frequency"] as const;
