@@ -40,7 +40,7 @@ function Spiral({ radius = 3.5, height = 8 }) {
     // Scroll-based rotation and translation
     const scrollOffset = scroll.offset;
     group.current.position.y = scrollOffset * height * 0.5;
-    group.current.rotation.y += scrollOffset * Math.PI * 0.5;
+    group.current.rotation.y += scrollOffset * Math.PI * 0.15;
 
     // Subtle pointer interaction (parallax)
     const targetX = (state.pointer.x * viewport.width) / 20;

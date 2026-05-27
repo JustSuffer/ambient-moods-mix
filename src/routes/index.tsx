@@ -51,19 +51,25 @@ function Landing() {
 
         <main className="max-w-4xl">
           <h1 className="font-display text-7xl md:text-[9rem] leading-[0.85] tracking-tight uppercase text-white drop-shadow-2xl">
-            Between Structure<br />
-            <span className="text-white/40">& Disorder</span>
+            LAYER YOUR<br />
+            <span className="text-white/40">PERFECT ATMOSPHERE</span>
           </h1>
           <p className="mt-8 font-mono text-xs uppercase tracking-[0.2em] max-w-sm text-white/60 leading-relaxed">
-            A shader-lit ribbon of image tiles. Scroll alters rotation. Pointer introduces subtle parallax. New forms begin here.
+            Mix rain, fireplace, lofi beats, and dark fantasy boss music. Layer up to two ambient sounds to craft your own atmosphere.
           </p>
           
-          <div className="mt-12">
+          <div className="mt-12 flex gap-4">
             <Link
-              to="/mixer"
+              to="/login"
               className="pointer-events-auto inline-block border border-white/20 px-6 py-3 text-[10px] font-mono uppercase tracking-[0.3em] text-white transition-all hover:bg-white hover:text-black"
             >
-              Enter Installation
+              Log In
+            </Link>
+            <Link
+              to="/signup"
+              className="pointer-events-auto inline-block border border-white/20 px-6 py-3 text-[10px] font-mono uppercase tracking-[0.3em] text-white transition-all hover:bg-white hover:text-black"
+            >
+              Sign Up
             </Link>
           </div>
         </main>
