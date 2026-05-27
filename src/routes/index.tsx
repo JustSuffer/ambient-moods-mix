@@ -9,10 +9,10 @@ const SpiralGallery = lazy(() => import("@/components/SpiralGallery").then((m) =
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "CODE 6 — Spiral Image Gallery" },
+      { title: "YourAmbience — Layer your perfect atmosphere" },
       {
         name: "description",
-        content: "An atmospheric editorial-gallery website built around a 3D spiral image installation.",
+        content: "Mix rain, fireplace, lofi beats, and dark fantasy boss music. Layer up to two ambient sounds to craft your own atmosphere.",
       },
     ],
   }),
@@ -21,7 +21,7 @@ export const Route = createFileRoute("/")({
 
 function Landing() {
   return (
-    <div className="min-h-[300vh] bg-[#050505] text-white selection:bg-white selection:text-black overflow-hidden relative">
+    <div className="h-screen w-full bg-[#050505] text-white selection:bg-white selection:text-black overflow-hidden relative">
       <SiteHeader />
 
       {/* 3D Canvas Background */}
@@ -40,8 +40,8 @@ function Landing() {
         
         <header className="flex justify-between items-start pt-16">
           <div className="flex flex-col gap-1 text-[10px] uppercase tracking-[0.3em] font-mono text-white/50">
-            <span>Registration: C-06</span>
-            <span>Studio Dialect</span>
+            <span>YourAmbience</span>
+            <span>Version 1.0</span>
           </div>
           <div className="flex gap-8 text-[10px] uppercase tracking-[0.2em] font-mono">
             <Link to="/about" className="pointer-events-auto hover:text-white/70 transition-colors">Method</Link>
@@ -77,10 +77,10 @@ function Landing() {
         </main>
 
         <footer className="flex justify-between items-end pb-4 font-mono text-[9px] uppercase tracking-[0.4em] text-white/40">
-          <span>01 / Scroll Field</span>
+          <span>01 / Ambient Mixer</span>
           <div className="flex gap-2">
             <span className="w-12 h-[1px] bg-white/20 mb-1" />
-            <span>WebGL System Active</span>
+            <span>System Active</span>
           </div>
         </footer>
         

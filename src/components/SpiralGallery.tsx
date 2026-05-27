@@ -42,7 +42,7 @@ function Spiral({ radius = 3.5, height = 8 }) {
     // Scroll-based position and rotation (static addition, not velocity)
     const scrollOffset = scroll.offset;
     group.current.position.y = scrollOffset * height * 0.5;
-    group.current.rotation.y = baseRotation.current + (scrollOffset * Math.PI * 0.5);
+    group.current.rotation.y = baseRotation.current + (scrollOffset * Math.PI * 2.0);
 
     // Subtle pointer interaction (parallax)
     const targetX = (state.pointer.x * viewport.width) / 20;
@@ -70,7 +70,7 @@ function Spiral({ radius = 3.5, height = 8 }) {
 
 export function SpiralGallery() {
   return (
-    <ScrollControls pages={1.8} damping={0.2}>
+    <ScrollControls pages={4} damping={0.2}>
       <Spiral />
     </ScrollControls>
   );
