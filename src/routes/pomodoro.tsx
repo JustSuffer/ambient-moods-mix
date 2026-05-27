@@ -142,12 +142,11 @@ function PomodoroPage() {
   const progress = 1 - remaining / totalSeconds;
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-background text-foreground">
+    <div className="relative min-h-screen overflow-hidden text-foreground">
+      {/* Solid base layer (behind images) */}
+      <div className="pointer-events-none fixed inset-0 -z-20 bg-gradient-to-br from-zinc-950 via-zinc-900 to-black" />
       {/* Slow-moving split backgrounds for picked sounds */}
       <div className="pointer-events-none fixed inset-0 -z-10">
-        {picked.length === 0 && (
-          <div className="absolute inset-0 bg-gradient-to-br from-zinc-950 via-zinc-900 to-black" />
-        )}
         {picked.map((s, i) => {
           const clip =
             picked.length === 1
