@@ -50,12 +50,14 @@ function Landing() {
         </header>
 
         <main className="max-w-4xl">
-          <h1 className="font-display text-7xl md:text-[9rem] leading-[0.85] tracking-tight uppercase text-white drop-shadow-2xl">
-            LAYER YOUR<br />
-            <span className="text-white/40">PERFECT ATMOSPHERE</span>
+          <h1 className="font-display text-7xl md:text-[9rem] leading-[0.85] tracking-tight uppercase drop-shadow-2xl">
+            <span className="text-white">LAYER YOUR</span><br />
+            <span className="text-[#cba65f]">PERFECT </span>
+            <span className="text-gray-400">ATMOSPHERE</span>
           </h1>
-          <p className="mt-8 font-mono text-xs uppercase tracking-[0.2em] max-w-sm text-white/60 leading-relaxed">
-            Mix rain, fireplace, lofi beats, and dark fantasy boss music. Layer up to two ambient sounds to craft your own atmosphere.
+          <p className="mt-8 font-mono text-xs uppercase tracking-[0.2em] max-w-sm text-gray-400 leading-relaxed">
+            <span className="text-[#cba65f]">Mix rain, fireplace, lofi beats, and dark fantasy boss music.</span><br />
+            Layer up to two ambient sounds to craft your own atmosphere.
           </p>
           
           <div className="mt-12 flex gap-4">
