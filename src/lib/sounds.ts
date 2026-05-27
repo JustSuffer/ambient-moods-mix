@@ -11,6 +11,11 @@ import bgWhiteNoise from "@/assets/bg-whitenoise.jpg";
 import bgPinkNoise from "@/assets/bg-pinknoise.jpg";
 import bgBrownNoise from "@/assets/bg-brownnoise.jpg";
 
+import pinkNoiseWav from "@/assets/pinknoise.wav";
+import brownNoiseWav from "@/assets/brownnoise.wav";
+import hz432Wav from "@/assets/432hz.wav";
+import hz528Wav from "@/assets/528hz.wav";
+
 export interface SoundDef {
   id: string;
   title: string;
@@ -66,16 +71,16 @@ export const SOUNDS: SoundDef[] = [
     src: mix(1041) },
   { id: "pinknoise", title: "Pink Noise", subtitle: "Softer highs · balanced energy",
     tag: "pink noise", section: "Pure Frequency", bg: bgPinkNoise, accent: "from-pink-400/60 to-rose-200/10",
-    src: mix(1042) },
+    src: pinkNoiseWav },
   { id: "brownnoise", title: "Brown Noise", subtitle: "Deep, rumbling low-end mask",
     tag: "brown noise", section: "Pure Frequency", bg: bgBrownNoise, accent: "from-amber-700/60 to-stone-300/10",
-    src: mix(2000) },
+    src: brownNoiseWav },
   { id: "432hz", title: "432 Hz Harmonic Tone", subtitle: "Healing frequency · pairs with Pink Noise",
     tag: "432 hz", section: "Pure Frequency", bg: bgPinkNoise, accent: "from-purple-400/60 to-fuchsia-200/10",
-    src: mix(2001) },
+    src: hz432Wav },
   { id: "528hz", title: "528 Hz Deep Tone", subtitle: "Solfeggio frequency · pairs with Brown Noise",
     tag: "528 hz", section: "Pure Frequency", bg: bgBrownNoise, accent: "from-emerald-700/60 to-teal-300/10",
-    src: mix(1210) },
+    src: hz528Wav },
 ];
 
 export const SECTIONS = ["Nature", "Urban & Life", "Music", "Fantasy & Focus", "Pure Frequency"] as const;
