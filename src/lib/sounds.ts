@@ -8,6 +8,8 @@ import bgThunder from "@/assets/bg-thunder.jpg";
 import bgSurf from "@/assets/bg-surf.jpg";
 import bgDojo from "@/assets/bg-dojo.jpg";
 import bgWhiteNoise from "@/assets/bg-whitenoise.jpg";
+import bgPinkNoise from "@/assets/bg-pinknoise.jpg";
+import bgBrownNoise from "@/assets/bg-brownnoise.jpg";
 
 import pinkNoiseWav from "@/assets/pinknoise.wav";
 import brownNoiseWav from "@/assets/brownnoise.wav";
