@@ -11,12 +11,17 @@ import bgWhiteNoise from "@/assets/bg-whitenoise.jpg";
 import bgPinkNoise from "@/assets/bg-pinknoise.jpg";
 import bgBrownNoise from "@/assets/bg-brownnoise.jpg";
 import bgLibrary from "@/assets/bg-library.jpg";
+import bgTavern from "@/assets/bg-tavern.jpg";
+
 
 import pinkNoiseWav from "@/assets/pinknoise.wav";
 import brownNoiseWav from "@/assets/brownnoise.wav";
 import hz432Wav from "@/assets/432hz.wav";
 import hz528Wav from "@/assets/528hz.wav";
 import hogwartsAudio from "@/assets/hogwarts.m4a";
+import darksoulsAudio from "@/assets/darksouls_new.m4a";
+import tlouAudio from "@/assets/tlou.m4a";
+import rdr2Audio from "@/assets/rdr2.m4a";
 
 export interface SoundDef {
   id: string;
@@ -121,13 +126,33 @@ export const SOUNDS: SoundDef[] = [
   },
   {
     id: "darksouls",
-    title: "Middle Earth",
-    subtitle: "Ancient calm of distant hills",
-    tag: "fantasy",
+    title: "Firelink Shrine",
+    subtitle: "Ashen calm & faint fire",
+    tag: "dark souls",
     section: "Fantasy & Focus",
     bg: bgDarkSouls,
     accent: "from-amber-300/60 to-amber-100/10",
-    src: mix(2459),
+    src: darksoulsAudio,
+  },
+  {
+    id: "tlou",
+    title: "The Last of Us",
+    subtitle: "Acoustic guitar in overgrown ruins",
+    tag: "guitar",
+    section: "Fantasy & Focus",
+    bg: bgWoods,
+    accent: "from-lime-900/60 to-emerald-300/10",
+    src: tlouAudio,
+  },
+  {
+    id: "rdr2",
+    title: "Red Dead Redemption",
+    subtitle: "Wilderness and campfire tales",
+    tag: "wild west",
+    section: "Fantasy & Focus",
+    bg: bgTavern,
+    accent: "from-orange-900/60 to-red-300/10",
+    src: rdr2Audio,
   },
   {
     id: "dojo",
