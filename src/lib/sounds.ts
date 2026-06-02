@@ -10,11 +10,13 @@ import bgDojo from "@/assets/bg-dojo.jpg";
 import bgWhiteNoise from "@/assets/bg-whitenoise.jpg";
 import bgPinkNoise from "@/assets/bg-pinknoise.jpg";
 import bgBrownNoise from "@/assets/bg-brownnoise.jpg";
+import bgLibrary from "@/assets/bg-library.jpg";
 
 import pinkNoiseWav from "@/assets/pinknoise.wav";
 import brownNoiseWav from "@/assets/brownnoise.wav";
 import hz432Wav from "@/assets/432hz.wav";
 import hz528Wav from "@/assets/528hz.wav";
+import hogwartsAudio from "@/assets/hogwarts.m4a";
 
 export interface SoundDef {
   id: string;
@@ -107,6 +109,16 @@ export const SOUNDS: SoundDef[] = [
   },
 
   // ───────── Fantasy & Focus ─────────
+  {
+    id: "hogwarts",
+    title: "Hogwarts Library",
+    subtitle: "Cozy fire, rain, and magic",
+    tag: "magic",
+    section: "Fantasy & Focus",
+    bg: bgLibrary,
+    accent: "from-emerald-900/60 to-green-300/10",
+    src: hogwartsAudio,
+  },
   {
     id: "darksouls",
     title: "Middle Earth",
