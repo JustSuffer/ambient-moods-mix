@@ -31,3 +31,8 @@ dist-ssr
 *.sln
 *.sw?
 .netlify/
+
+# Environment variables
+.env
+.env.*
+.env.local
