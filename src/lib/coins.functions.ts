@@ -63,3 +63,22 @@ export const getLeaderboard = createServerFn({ method: "GET" }).handler(async ()
   if (error) throw new Error(error.message);
   return { rows: data ?? [] };
 });
+
+export const updateProfile = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) => {
+    const data = input as { display_name?: string };
+    return { display_name: data?.display_name?.trim().slice(0, 30) || null };
+  })
+  .handler(async ({ data, context }) => {
+    const { userId } = context as { userId: string };
+    if (!data.display_name) throw new Error("Display name cannot be empty");
+
+    const { error } = await supabaseAdmin
+      .from("profiles")
+      .update({ display_name: data.display_name })
+      .eq("id", userId);
+      
+    if (error) throw new Error(error.message);
+    return { success: true, display_name: data.display_name };
+  });

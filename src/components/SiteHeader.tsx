@@ -1,11 +1,20 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useServerFn } from "@tanstack/react-start";
 import { getMyProfile } from "@/lib/coins.functions";
+import { User } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export function SiteHeader() {
   const { user, signOut } = useAuth();
+  const navigate = useNavigate();
   const fetchProfile = useServerFn(getMyProfile);
   const [coins, setCoins] = useState<number | null>(null);
 
@@ -41,12 +50,25 @@ export function SiteHeader() {
                   ◈ {coins}
                 </span>
               )}
-              <button
-                onClick={() => signOut()}
-                className="rounded-full border border-foreground/20 px-3 py-1.5 hover:border-foreground/50"
-              >
-                Sign out
-              </button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className="flex h-8 w-8 items-center justify-center rounded-full border border-foreground/20 bg-background/50 hover:border-foreground/50 transition-colors">
+                    <User className="h-4 w-4" />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48 bg-black/90 border-foreground/10 text-foreground backdrop-blur-md">
+                  <DropdownMenuItem asChild className="cursor-pointer font-mono text-[10px] uppercase tracking-widest focus:bg-white/10">
+                    <Link to="/settings" className="w-full">Settings</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator className="bg-foreground/10" />
+                  <DropdownMenuItem 
+                    onClick={() => signOut()} 
+                    className="cursor-pointer font-mono text-[10px] uppercase tracking-widest focus:bg-rose-500/20 focus:text-rose-400"
+                  >
+                    Sign out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </>
           ) : (
             <>
