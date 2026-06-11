@@ -60,6 +60,9 @@ export function SiteHeader() {
                   <DropdownMenuItem asChild className="cursor-pointer font-mono text-[10px] uppercase tracking-widest focus:bg-white/10">
                     <Link to="/settings" className="w-full">Settings</Link>
                   </DropdownMenuItem>
+                  <DropdownMenuItem asChild className="cursor-pointer font-mono text-[10px] uppercase tracking-widest focus:bg-amber-500/20">
+                    <Link to="/pricing" className="w-full text-amber-200">Pricing</Link>
+                  </DropdownMenuItem>
                   <DropdownMenuSeparator className="bg-foreground/10" />
                   <DropdownMenuItem 
                     onClick={() => signOut()} 
