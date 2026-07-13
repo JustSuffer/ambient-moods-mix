@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { authClient } from "@/lib/authClient";
 import { SiteHeader } from "@/components/SiteHeader";
 
 export const Route = createFileRoute("/login")({
@@ -19,7 +19,7 @@ function Login() {
     e.preventDefault();
     setErr(null);
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { error } = await authClient.auth.signInWithPassword({ email, password });
     setLoading(false);
     if (error) { setErr(error.message); return; }
     navigate({ to: "/mixer" });

@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { authClient } from "@/lib/authClient";
 import { SiteHeader } from "@/components/SiteHeader";
 
 export const Route = createFileRoute("/signup")({
@@ -19,7 +19,7 @@ function Signup() {
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setErr(null); setInfo(null); setLoading(true);
-    const { data, error } = await supabase.auth.signUp({
+    const { data, error } = await authClient.auth.signUp({
       email,
       password,
       options: { emailRedirectTo: window.location.origin },
