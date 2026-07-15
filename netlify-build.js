@@ -1,8 +1,7 @@
 import fs from 'fs';
 import { execSync } from 'child_process';
 
-console.log('Installing @netlify/vite-plugin-tanstack-start...');
-execSync('npm install -D @netlify/vite-plugin-tanstack-start', { stdio: 'inherit' });
+console.log('Skipping redundant npm install...');
 
 console.log('Modifying vite.config.ts for Netlify...');
 const configPath = './vite.config.ts';
